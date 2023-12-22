@@ -1,17 +1,18 @@
 import { toast } from 'react-toastify';
 
 function validateDiaryCard(title: string, description: string): boolean {
-  if (!title.trim()) {
-    toast.error('Please enter a title for the diary card');
-    return false;
-  }
-
-  if (!description.trim()) {
-    toast.error('Please enter a description for the diary card');
+  if (!title.trim() || !description.trim()) {
+    toast.error('Title and description are required!');
     return false;
   }
 
   return true;
 }
 
-export default  validateDiaryCard ;
+
+
+function cardAdded(): void {
+  toast.success('New diary card added successfully!');
+}
+
+export { validateDiaryCard, cardAdded };
