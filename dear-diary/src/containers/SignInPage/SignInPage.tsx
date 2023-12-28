@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../redux/hooks";
 import { userLoggedIn } from "../../redux/user/userSlice";
 import DearDiary from '../../components/DearDiary/DearDiary';
+import { setNotification } from '../../redux/notification/notificationSlice';
 
 const Background = styled.div`
     display: flex;
@@ -95,35 +96,56 @@ const SubmitButtonStyled = styled(Button)`
     text-transform: none !important;
     font-size: 100%;
     color: rgb(255, 255, 255) !important;
-    background: #0092DD !important;
+    background-color: #0092DD !important;
+
+    &:disabled {
+        background: rgba(0, 146, 221, 0.6) !important;
+    }
+
 `;
 
 const MediaQueryStyles = styled.div`
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 1000px) {
         ${SignInPageContainer} {
             width: 95%;
             justify-content: center;
         }
 
         ${SignInTitle} {
-            transform: scale(0.75);
+            transform: scale(0.85);
         }
 
         ${SignInPageFormWrapper}{
-            width: 98%;
+            width: 90%;
+            align-items: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
-        ${SignInPageFormWrapper} {
-            width: 98%;
+        ${RandomButton}{
+            margin-top: 5%;
+            margin-left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
         }
 
         ${SignInForm} {
-            padding: 4% 4% 4% 4%;
-            transform: scale(0.85);
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 4% 4% 1% 4%;
         }
 
         ${SubmitButtonStyled} {
-            transform: scale(0.85);
+            min-width: 45%;
+
+        }
+
+        ${RandomButtonStyled}{
+            min-width: 45%;
         }
     }
 `;
@@ -135,6 +157,7 @@ const SignInPage = () => {
 
     const handleLogin = () => {
         dispatch(userLoggedIn(nameRandom));
+        dispatch(setNotification({  type: "success", message: 'Login Successful', showtime: false, show: true }));
         navigate('/home');
     };
 
@@ -149,7 +172,7 @@ const SignInPage = () => {
                         <SignInForm>
                             <LoginTextField
                                 id="outlined-basic"
-                                placeholder="Your nickname"
+                                placeholder="Your nickname*"
                                 variant="outlined"
                                 className="text-field-login"
                                 size="small"
@@ -163,7 +186,7 @@ const SignInPage = () => {
                             </RandomButton>
                         </SignInForm>
                         <SubmitButtonWrapper>
-                            <SubmitButtonStyled variant="contained" className="btn-continue" onClick={() => handleLogin()} disabled={!nameRandom}>
+                            <SubmitButtonStyled variant="contained" onClick={() => handleLogin()} disabled={!nameRandom}>
                                 Continue
                                 <ArrowForwardIcon />
                             </SubmitButtonStyled>

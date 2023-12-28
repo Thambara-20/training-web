@@ -1,8 +1,8 @@
-import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function validateDiaryCard(title: string, description: string): boolean {
+
   if (!title.trim() || !description.trim()) {
-    toast.error('Title and description are required!');
     return false;
   }
 
@@ -10,9 +10,4 @@ function validateDiaryCard(title: string, description: string): boolean {
 }
 
 
-
-function cardAdded(): void {
-  toast.success('New diary card added successfully!');
-}
-
-export { validateDiaryCard, cardAdded };
+export { validateDiaryCard };

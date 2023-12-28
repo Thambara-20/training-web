@@ -5,12 +5,18 @@ import { PayloadAction } from '@reduxjs/toolkit';
 function* actionUser(action: PayloadAction<string>) {
   const userName = action.payload;
   localStorage.setItem("userName", userName);
-  yield put(setUserName(userName));
-  
+
+  try {
+    yield put(setUserName(userName));
+  }
+  catch (e) {
+    console.log(e);
+  }
+
 }
 
 function* userSaga() {
-     yield takeEvery(userLoggedIn, actionUser);
+  yield takeEvery(userLoggedIn, actionUser);
 
 }
 
