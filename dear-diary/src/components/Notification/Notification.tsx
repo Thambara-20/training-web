@@ -10,25 +10,23 @@ import { useAppDispatch, useAppSelector } from '../../redux/hooks';
 const StyledSnackbarContent = styled(SnackbarContent)`
     background-color: white !important;
     color: black !important;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+    display: flex !important ;
+    justify-content: space-between !important;
+    align-items: center !important;
+    width: 100% !important;
 
-  .css-1exqwzz-MuiSnackbarContent-message {
-    padding: 0px 0px 0px 0px;
-    width: 90%; }
-
-  .css-1kr9x0n-MuiSnackbarContent-action {
+  .MuiSnackbarContent-message {
     padding: 0px 0px 0px 0px !important;
-    margin-left:5px
-    width: 12%;
+    width: 90% !important;}
+
+  .MuiSnackbarContent-action {
+    padding: 0px 0px 0px 0px !important;
   }
 
     @media screen and (max-width: 768px) {
 
-        .css-1exqwzz-MuiSnackbarContent-message {
-            width: max-content;
+        .MuiSnackbarContent-message {
+            width: max-content !important;
         }
     }
 `;
@@ -63,7 +61,6 @@ const StyledMessage = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-
     `
 const StyledText = styled.div`
     display: flex;
@@ -104,10 +101,10 @@ const Notification: React.FC = () => {
     useEffect(() => {
         let autoCloseTimeout: NodeJS.Timeout | null = null;
 
-        if (!showtime ) {
+        if (!showtime) {
             autoCloseTimeout = setTimeout(() => {
                 dispatch(hideNotification());
-            }, 3000); 
+            }, 3000);
         }
 
         return () => {
